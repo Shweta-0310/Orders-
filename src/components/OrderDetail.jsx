@@ -128,30 +128,209 @@ function TimelineStep({ title, time, events, completed, last = false }) {
   );
 }
 
-// ── Accordion row ────────────────────────────────────────────────────────────
 
-function AccordionRow({ title, value }) {
-  const [open, setOpen] = useState(false);
+// ── Tab section icons ─────────────────────────────────────────────────────────
+
+function IconTransaction() {
   return (
-    <div className="border-b border-[#eceff3] last:border-0">
-      <button
-        className="flex w-full items-center justify-between px-4 py-5 hover:bg-[#fcfcfd] transition-colors"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="text-[14px] font-medium text-[#2b303b]">{title}</span>
-        <ChevronDownIcon className={`w-3.5 h-3.5 text-[#525866] transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      {open && (
-        <div className="px-4 pb-4 text-[14px] text-[#717784]">{value}</div>
-      )}
+    <svg className="w-3 h-3 shrink-0 text-[#525866]" viewBox="0 0 12 12" fill="none">
+      <path d="M2.5 1.5H9.5M2.5 4H9.5M2.5 1.5V10.5L6 8.5L9.5 10.5V1.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconRefunds() {
+  return (
+    <svg className="w-3 h-3 shrink-0 text-[#525866]" viewBox="0 0 12 12" fill="none">
+      <path d="M1.5 6A4.5 4.5 0 0 1 10.5 4" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+      <path d="M10.5 6A4.5 4.5 0 0 1 1.5 8" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+      <path d="M8.5 2.5L10.5 4L8.5 5.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3.5 9.5L1.5 8L3.5 6.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconCustomer() {
+  return (
+    <svg className="w-3 h-3 shrink-0 text-[#525866]" viewBox="0 0 12 12" fill="none">
+      <circle cx="5" cy="4" r="2" stroke="currentColor" strokeWidth="1.1" />
+      <path d="M1.5 10C1.5 8.067 3.067 6.5 5 6.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+      <path d="M7.5 8L9 9.5L11 7" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconUDF() {
+  return (
+    <svg className="w-3 h-3 shrink-0 text-[#525866]" viewBox="0 0 12 12" fill="none">
+      <path d="M1 6C2 4 3 2 4 6C5 10 6 2 7 6C8 10 9 4 11 6" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconPencil() {
+  return (
+    <svg className="w-3 h-3 text-blue-500" viewBox="0 0 12 12" fill="none">
+      <path d="M8.5 1.5L10.5 3.5L4 10H2V8L8.5 1.5Z" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// ── Transaction row ───────────────────────────────────────────────────────────
+
+function TransactionRow({ id, status, date, attempts, gateway }) {
+  return (
+    <div className="flex items-start justify-between px-6 py-4 border-b border-[#eceff3] hover:bg-[#fcfcfd] transition-colors cursor-pointer group last:border-0">
+      <div className="flex flex-col gap-1.5 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[15px] font-semibold text-[#222530] leading-6 truncate">{id}</span>
+          <span className="inline-flex items-center px-2 py-0.5 rounded-[6px] text-[11px] font-medium bg-red-50 text-red-600 whitespace-nowrap">{status}</span>
+        </div>
+        <span className="text-[13px] text-[#525866]">{date} | {attempts}</span>
+      </div>
+      <div className="flex items-center gap-2.5 shrink-0 ml-4 mt-0.5">
+        {/* PG | Razorpay split tag */}
+        <div className="flex items-center h-[22px]">
+          <span className="flex items-center px-2 h-full text-[11px] font-semibold text-[#717784] bg-[#f2f4f8] border border-[#e1e4ea] rounded-l-[6px] border-r-0 whitespace-nowrap">PG</span>
+          <div className="flex items-center gap-1 px-2 h-full text-[11px] font-medium text-[#525866] bg-white border border-[#e1e4ea] rounded-r-[6px] whitespace-nowrap">
+            <IconPencil />
+            <span>{gateway}</span>
+          </div>
+        </div>
+        <ChevronRightSmall />
+      </div>
     </div>
   );
 }
 
 // ── Main component ───────────────────────────────────────────────────────────
 
-const TABS = ['Payment', 'Refund', 'Dispute', 'Additional Info'];
-const TAB_MENU = ['Payment Details', 'EMI Info', 'Auth', 'Surcharge'];
+const TABS = ['Order', 'Offers', 'Webhooks', 'Chargeback'];
+
+const TAB_MENU = [
+  { label: 'Transaction', Icon: IconTransaction },
+  { label: 'Refunds', Icon: IconRefunds },
+  { label: 'Customer Details', Icon: IconCustomer },
+  { label: 'UDF Parameter', Icon: IconUDF },
+];
+
+const TRANSACTIONS = [
+  { id: 'geddit-YY10ABBMB60434-1', status: 'Authentication Failed', date: 'Dec 12, 2025 | 11:23:22 PM', attempts: '5 Attempts', gateway: 'Razorpay' },
+  { id: 'geddit-YY10ABBMB60434-1', status: 'Authentication Failed', date: 'Dec 12, 2025 | 11:23:22 PM', attempts: '5 Attempts', gateway: 'Razorpay' },
+  { id: 'geddit-YY10ABBMB60434-1', status: 'Authentication Failed', date: 'Dec 12, 2025 | 11:23:22 PM', attempts: '5 Attempts', gateway: 'Razorpay' },
+  { id: 'geddit-YY10ABBMB60434-1', status: 'Authentication Failed', date: 'Dec 12, 2025 | 11:23:22 PM', attempts: '5 Attempts', gateway: 'Razorpay' },
+];
+
+const OFFERS = [
+  { id: 'Offer Id:5677575757', status: 'Success', txnId: '4657882848', benefit: 'Cashback' },
+  { id: 'P1ZFwFteF15AP4fgpVz7', status: 'Failed', txnId: '4657882848', benefit: 'Cashback' },
+  { id: 'P1ZFwFteF15AP4fgpVz7', status: 'Success', txnId: '4657882848', benefit: 'Cashback' },
+];
+
+// ── Webhook & Chargeback data + components ───────────────────────────────────
+
+const WEBHOOKS = [
+  { title: 'Order Succeded', status: 'Notified', datetime: 'Jan 12, 2025 12:44:32', id: 'dhh4HHdjkkkjcc', from: 'Merchant', to: 'Juspay' },
+  { title: 'Txn Created',    status: 'Silent',   datetime: 'Jan 12, 2025 12:44:32', id: 'dhh4HHdjkkkjcc', from: 'Juspay',   to: 'Merchant' },
+  { title: 'Order Failed',   status: 'Silent',   datetime: 'Jan 12, 2025 12:44:32', id: 'dhh4HHdjkkkjcc', from: 'Merchant', to: 'Juspay' },
+];
+
+const CHARGEBACKS = [
+  { id: 'Chargeback ID',       status: 'Received', amount: '₹799', datetime: 'Jan 12, 2025 12:44:32' },
+  { id: 'P1ZFwFteF15AP4fgpVz7', status: 'Failed',   amount: '₹799', datetime: 'Jan 12, 2025 12:44:32' },
+];
+
+function PartyPill({ name }) {
+  const isMerchant = name === 'Merchant';
+  return (
+    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[12px] font-medium ${
+      isMerchant ? 'border-[#e1e4ea] text-[#2b303b]' : 'border-[#e1e4ea] text-[#2b303b]'
+    }`}>
+      {isMerchant ? (
+        <div className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+          <span className="text-[8px] font-bold text-red-600">M</span>
+        </div>
+      ) : (
+        <div className="w-4 h-4 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+          <span className="text-[8px] font-bold text-blue-600">J</span>
+        </div>
+      )}
+      {name}
+    </div>
+  );
+}
+
+function ArrowRight() {
+  return (
+    <svg className="w-3.5 h-3.5 text-[#99a0ae] shrink-0" viewBox="0 0 14 14" fill="none">
+      <path d="M3 7H11M11 7L8 4M11 7L8 10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function WebhookRow({ title, status, datetime, id, from, to }) {
+  const isNotified = status === 'Notified';
+  return (
+    <div className="flex items-center justify-between px-6 py-5 border-b border-[#eceff3] hover:bg-[#fcfcfd] transition-colors cursor-pointer last:border-0">
+      <div className="flex flex-col gap-1.5 min-w-0">
+        <div className="flex items-center gap-2">
+          <span className="text-[15px] font-bold text-[#222530]">{title}</span>
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-[6px] text-[11px] font-medium whitespace-nowrap ${
+            isNotified ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-500'
+          }`}>{status}</span>
+        </div>
+        <span className="text-[13px] text-[#525866]">{datetime} | ID: {id}</span>
+      </div>
+      <div className="flex items-center gap-2 shrink-0 ml-4">
+        <PartyPill name={from} />
+        <ArrowRight />
+        <PartyPill name={to} />
+      </div>
+    </div>
+  );
+}
+
+function ChargebackRow({ id, status, amount, datetime }) {
+  const isReceived = status === 'Received';
+  return (
+    <div className="flex items-start justify-between px-6 py-5 border-b border-[#eceff3] hover:bg-[#fcfcfd] transition-colors cursor-pointer last:border-0">
+      <div className="flex flex-col gap-1.5 min-w-0">
+        <div className="flex items-center gap-2">
+          <span className="text-[15px] font-bold text-[#222530]">{id}</span>
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-[6px] text-[11px] font-medium whitespace-nowrap ${
+            isReceived ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-500'
+          }`}>{status}</span>
+        </div>
+        <span className="text-[13px] text-[#525866]">{amount} | {datetime}</span>
+      </div>
+    </div>
+  );
+}
+
+function OfferRow({ id, status, txnId, benefit }) {
+  const isSuccess = status === 'Success';
+  return (
+    <div className="flex items-center justify-between px-6 py-4 border-b border-[#eceff3] hover:bg-[#fcfcfd] transition-colors cursor-pointer last:border-0">
+      <div className="flex flex-col gap-1.5 min-w-0">
+        <div className="flex items-center gap-2">
+          <span className="text-[15px] font-semibold text-[#222530]">{id}</span>
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-[6px] text-[11px] font-medium whitespace-nowrap ${
+            isSuccess ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'
+          }`}>{status}</span>
+        </div>
+        <span className="text-[13px] text-[#525866]">TXN ID: {txnId}</span>
+      </div>
+      <div className="flex items-center gap-2.5 shrink-0 ml-4">
+        {/* Benefit | Cashback split tag */}
+        <div className="flex items-center h-[22px]">
+          <span className="flex items-center px-2 h-full text-[11px] font-semibold text-[#717784] bg-[#f2f4f8] border border-[#e1e4ea] rounded-l-[6px] border-r-0 whitespace-nowrap">Benefit</span>
+          <span className="flex items-center px-2 h-full text-[11px] font-semibold text-white bg-[#2b303b] border border-[#2b303b] rounded-r-[6px] whitespace-nowrap">{benefit}</span>
+        </div>
+        <ChevronRightSmall />
+      </div>
+    </div>
+  );
+}
 
 export function OrderDetail({ order, onBack }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -378,7 +557,7 @@ export function OrderDetail({ order, onBack }) {
                       onClick={() => setActiveTab(i)}
                       className={`px-5 py-3 text-[14px] font-medium transition-colors border-b-2 -mb-px ${
                         activeTab === i
-                          ? 'text-blue-600 border-blue-600'
+                          ? 'text-[#2b303b] border-[#2b303b]'
                           : 'text-[#717784] border-transparent hover:text-[#525866]'
                       }`}
                     >
@@ -388,32 +567,60 @@ export function OrderDetail({ order, onBack }) {
                 </div>
 
                 {/* Tab content */}
-                <div className="flex">
-                  {/* Left menu */}
-                  <div className="w-[235px] border-r border-[#eceff3] p-2 flex flex-col gap-1">
-                    {TAB_MENU.map((item, i) => (
-                      <button
-                        key={item}
-                        onClick={() => setActiveMenu(i)}
-                        className={`w-full text-left px-3 py-2 text-[14px] rounded-[6px] transition-colors ${
-                          activeMenu === i
-                            ? 'bg-[#f2f4f8] font-medium text-[#2b303b]'
-                            : 'text-[#525866] hover:bg-[#fcfcfd]'
-                        }`}
-                      >
-                        {item}
-                      </button>
+                {activeTab === 1 ? (
+                  /* Offers — full-width rows */
+                  <div className="min-w-0">
+                    {OFFERS.map((offer, i) => (
+                      <OfferRow key={i} {...offer} />
                     ))}
                   </div>
-
-                  {/* Right accordion */}
-                  <div className="flex-1">
-                    <AccordionRow title="Transaction ID" value="TXN-8473628-9274B" />
-                    <AccordionRow title="Payment Method" value="UPI / PhonePe" />
-                    <AccordionRow title="Gateway Response Code" value="00 — Success" />
-                    <AccordionRow title="Bank Reference Number" value="423876234876" />
+                ) : activeTab === 2 ? (
+                  /* Webhooks — full-width rows */
+                  <div className="min-w-0">
+                    {WEBHOOKS.map((wh, i) => (
+                      <WebhookRow key={i} {...wh} />
+                    ))}
                   </div>
-                </div>
+                ) : activeTab === 3 ? (
+                  /* Chargeback — rows + initiate link */
+                  <div className="min-w-0">
+                    {CHARGEBACKS.map((cb, i) => (
+                      <ChargebackRow key={i} {...cb} />
+                    ))}
+                    <div className="px-6 py-4">
+                      <button className="flex items-center gap-1 text-[14px] font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                        Initiate Chargeback <ChevronRightSmall />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex">
+                    {/* Left menu */}
+                    <div className="w-[235px] shrink-0 border-r border-[#eceff3] p-2 flex flex-col gap-1">
+                      {TAB_MENU.map(({ label, Icon }, i) => (
+                        <button
+                          key={label}
+                          onClick={() => setActiveMenu(i)}
+                          className={`w-full text-left flex items-center gap-2 px-3 py-[7px] text-[14px] rounded-[6px] transition-colors ${
+                            activeMenu === i
+                              ? 'bg-[#f5f7fa] font-medium text-[#2b303b]'
+                              : 'text-[#525866] hover:bg-[#fcfcfd]'
+                          }`}
+                        >
+                          <Icon />
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Right — transaction rows */}
+                    <div className="flex-1 min-w-0">
+                      {TRANSACTIONS.map((tx, i) => (
+                        <TransactionRow key={i} {...tx} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
