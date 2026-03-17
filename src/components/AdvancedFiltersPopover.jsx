@@ -157,7 +157,7 @@ export function AdvancedFiltersPopover({ onClose, onApply, initialFilters = {} }
   return (
     <div
       ref={ref}
-      className="absolute right-0 top-full mt-1 w-[511px] bg-white border border-[#e1e4ea] rounded-[12px] shadow-[0px_4px_16px_2px_rgba(5,5,6,0.10)] z-30 flex flex-col overflow-hidden"
+      className="absolute left-0 top-full mt-1 w-[511px] bg-white border border-[#e1e4ea] rounded-[12px] shadow-[0px_4px_16px_2px_rgba(5,5,6,0.10)] z-30 flex flex-col overflow-hidden"
     >
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-1.5 border-b border-[#e1e4ea]">
