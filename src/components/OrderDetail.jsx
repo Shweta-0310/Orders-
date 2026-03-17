@@ -341,11 +341,11 @@ export function OrderDetail({ order, onBack }) {
     <div className="flex flex-col flex-1 min-w-0 h-full overflow-hidden relative">
       <GeniusSidebar open={geniusOpen} onClose={() => setGeniusOpen(false)} order={order} />
       {/* Topbar */}
-      <div className="flex items-center justify-between px-8 h-[68px] border-b border-[#e1e4ea] bg-white shrink-0">
-        <div className="flex items-center gap-2 w-[350px] h-9 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white">
+      <div className="flex items-center justify-between px-4 lg:px-8 h-[68px] border-b border-[#e1e4ea] bg-white shrink-0 gap-3">
+        <div className="flex items-center gap-2 flex-1 max-w-[350px] h-9 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white">
           <SearchIcon className="w-4 h-4 text-[#99a0ae] shrink-0" />
           <span className="text-sm text-[#99a0ae] flex-1">Search</span>
-          <span className="text-xs text-[#99a0ae] shrink-0">⌘ + K</span>
+          <span className="text-xs text-[#99a0ae] shrink-0 hidden md:block">⌘ + K</span>
         </div>
         <div className="flex items-center gap-4">
           <button className="flex items-center justify-center w-9 h-9 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white hover:bg-[#f2f4f8]">
@@ -363,7 +363,7 @@ export function OrderDetail({ order, onBack }) {
 
       {/* Scrollable body */}
       <div className="flex-1 overflow-y-auto">
-        <div className="px-10 py-5 flex flex-col gap-6">
+        <div className="px-4 py-4 lg:px-10 lg:py-5 flex flex-col gap-6">
 
           {/* Breadcrumb + title */}
           <div className="flex flex-col gap-3">
@@ -372,9 +372,9 @@ export function OrderDetail({ order, onBack }) {
               <ChevronRightSmall />
               <span className="text-[#525866] font-medium">Order Detail</span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-3">
               <h1 className="text-[24px] font-semibold text-[#222530] leading-8">Order Detail</h1>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <button className="flex items-center gap-1.5 h-8 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white text-[12px] font-medium text-[#525866] hover:bg-[#f2f4f8] transition-colors">
                   <span>Order ID</span>
                   <ChevronDownIcon className="w-3 h-3" />
@@ -391,16 +391,16 @@ export function OrderDetail({ order, onBack }) {
           </div>
 
           {/* Two-column layout */}
-          <div className="flex gap-6 items-start">
+          <div className="flex flex-col min-[1010px]:flex-row gap-6 items-start">
 
             {/* LEFT COLUMN */}
-            <div className="flex flex-col gap-6 flex-1 min-w-0">
+            <div className="flex flex-col gap-6 flex-1 min-w-0 min-[1010px]:min-w-[500px]">
 
               {/* Hero card */}
               <div className="border border-[#e1e4ea] rounded-xl bg-white overflow-hidden">
-                <div className="flex items-stretch h-[256px] p-1.5 gap-0">
+                <div className="flex flex-col lg:flex-row items-stretch lg:h-[256px] p-1.5 gap-0">
                   {/* Gray panel */}
-                  <div className="w-[42%] bg-[#f2f4f8] rounded-[10px] flex flex-col justify-between overflow-hidden">
+                  <div className="min-w-[400px] lg:w-[42%] bg-[#f2f4f8] rounded-[10px] flex flex-col justify-between overflow-hidden">
                     <div className="flex flex-col gap-2.5 px-6 pt-6">
                       <div className="flex items-center gap-1.5">
                         <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0">
@@ -414,7 +414,7 @@ export function OrderDetail({ order, onBack }) {
                         This order is successful. We used Juspay's Silent Retry &amp; SR V2 Routing feature to make this successful.
                       </p>
                     </div>
-                    <div className="flex items-center justify-between px-4 py-3 border-t border-[#e1e4ea]">
+                    <div className="min-w-max flex items-center justify-between px-4 py-3 border-t border-[#e1e4ea]">
                       <p className="text-[14px] font-medium text-[#525866]">Want to know more about this order?</p>
                       <button
                         className="flex items-center gap-2 px-2 py-1 rounded-[8px] hover:bg-[#e8eaed] transition-colors"
@@ -431,7 +431,7 @@ export function OrderDetail({ order, onBack }) {
 
                   {/* Right info */}
                   <div className="flex-1 flex flex-col justify-center gap-6 px-4 py-6">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
                         <span className="text-[20px] font-semibold text-[#2b303b] leading-[26px]">ID -55668484</span>
                         <Tag text="Success" color="success" />
@@ -474,7 +474,7 @@ export function OrderDetail({ order, onBack }) {
               </div>
 
               {/* Retries banner */}
-              <div className="flex items-center justify-between px-4 py-3 border border-[#e1e4ea] border-l-4 border-l-[#00c951] rounded-xl bg-[#fcfcfd] shadow-xs">
+              <div className="flex items-center justify-between flex-wrap gap-3 px-4 py-3 border border-[#e1e4ea] border-l-4 border-l-[#00c951] rounded-xl bg-[#fcfcfd] shadow-xs">
                 <div className="flex flex-col gap-1">
                   <p className="text-[16px] font-medium text-[#222530]">Retries Attempts made</p>
                   <p className="text-[14px] text-[#717784]">The following Juspay features were employed to ensure that this order was successfully completed</p>
@@ -624,8 +624,8 @@ export function OrderDetail({ order, onBack }) {
               </div>
             </div>
 
-            {/* RIGHT COLUMN — Timeline */}
-            <div className="w-[466px] shrink-0 flex flex-col gap-3">
+            {/* RIGHT COLUMN — Timeline: visible above 1010px, min 350px, shrinks naturally */}
+            <div className="hidden min-[1010px]:flex min-[1010px]:flex-col gap-3 min-w-[350px] w-[350px] min-[1440px]:w-[466px]">
               <h2 className="text-[18px] font-semibold text-[#2b303b] leading-6">Order Timeline</h2>
               <div className="bg-white pt-2 pb-4 flex flex-col gap-2">
                 <TimelineStep

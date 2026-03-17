@@ -117,7 +117,7 @@ export function OrdersTable({ onRowClick }) {
   const totalPages = 4;
 
   return (
-    <div className="px-10 pb-6">
+    <div className="px-4 lg:px-10 pb-6">
       <div className="flex flex-col w-full">
         {/* Table */}
         <div className="overflow-x-auto">

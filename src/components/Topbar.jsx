@@ -2,12 +2,12 @@ import { SearchIcon, BellIcon, ActivityIcon, SparklesIcon } from './icons.jsx';
 
 export function Topbar({ onGeniusClick }) {
   return (
-    <div className="flex items-center justify-between px-8 h-[68px] border-b border-[#e1e4ea] bg-white shrink-0">
+    <div className="flex items-center justify-between px-4 lg:px-8 h-[68px] border-b border-[#e1e4ea] bg-white shrink-0 gap-3">
       {/* Search */}
-      <div className="flex items-center gap-2 w-[350px] h-9 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white">
+      <div className="flex items-center gap-2 flex-1 max-w-[350px] h-9 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white">
         <SearchIcon className="w-4 h-4 text-[#99a0ae] shrink-0" />
         <span className="text-sm text-[#99a0ae] flex-1">Search</span>
-        <span className="text-xs text-[#99a0ae] shrink-0">⌘ + K</span>
+        <span className="text-xs text-[#99a0ae] shrink-0 hidden md:block">⌘ + K</span>
       </div>
 
       {/* Right section */}

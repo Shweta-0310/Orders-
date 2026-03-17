@@ -79,9 +79,9 @@ export function Filters() {
   }
 
   return (
-    <div className="px-10 bg-white">
+    <div className="px-4 lg:px-10 bg-white">
       {/* Title row */}
-      <div className="flex items-center justify-between h-[68px]">
+      <div className="flex items-center justify-between flex-wrap gap-y-2 min-h-[68px] py-2">
         <div className="flex items-center gap-2.5">
           <h1 className="text-[24px] font-semibold text-[#222530] leading-8 whitespace-nowrap">
             Order Management

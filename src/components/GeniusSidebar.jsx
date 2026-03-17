@@ -150,7 +150,7 @@ export function GeniusSidebar({ open, onClose }) {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-[475px] bg-white border-l border-[#e1e4ea] shadow-[−4px_0_24px_rgba(5,5,6,0.08)] z-50 flex flex-col transition-transform duration-300 ease-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 h-full w-full sm:w-[475px] max-w-full bg-white border-l border-[#e1e4ea] shadow-[−4px_0_24px_rgba(5,5,6,0.08)] z-50 flex flex-col transition-transform duration-300 ease-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#e1e4ea] shrink-0">
