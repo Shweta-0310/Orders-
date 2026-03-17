@@ -258,7 +258,7 @@ export function GeniusSidebar({ open, onClose }) {
               className="flex-1 bg-transparent text-[14px] text-[#2b303b] placeholder-[#99a0ae] outline-none min-w-0"
             />
             <button
-              className="flex items-center justify-center w-7 h-7 rounded-[8px] shrink-0 transition-colors"
+              className="flex items-center justify-center w-7 h-7 rounded-[8px] shrink-0 transition-all hover:opacity-85 active:scale-95"
               style={{ background: inputValue.trim() ? 'linear-gradient(140deg, #9747ff 41%, #1b85ff 116%)' : '#cacfd8' }}
             >
               <SendIcon />

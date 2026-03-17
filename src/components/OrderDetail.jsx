@@ -77,7 +77,7 @@ function CurrencyIcon() {
 function KeyValue({ label, value, valueClass = 'text-[#2b303b]', link = false }) {
   return (
     <div className="flex flex-col gap-1">
-      <p className={`text-[14px] font-semibold leading-5 whitespace-nowrap ${link ? 'text-blue-600' : valueClass}`}>{value}</p>
+      <p className={`text-[14px] font-semibold leading-5 whitespace-nowrap ${link ? 'text-blue-600 hover:underline cursor-pointer' : valueClass}`}>{value}</p>
       <p className="text-[14px] font-normal text-[#717784] leading-5 whitespace-nowrap">{label}</p>
     </div>
   );
@@ -175,7 +175,7 @@ export function OrderDetail({ order, onBack }) {
           <button className="flex items-center justify-center w-9 h-9 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white hover:bg-[#f2f4f8]">
             <ActivityIcon className="w-4 h-4" />
           </button>
-          <button className="flex items-center gap-2 h-9 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white hover:bg-[#f2f4f8]">
+          <button onClick={() => setGeniusOpen(true)} className="flex items-center gap-2 h-9 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white hover:bg-[#f2f4f8]">
             <SparklesIcon className="w-3 h-3 text-[#525866]" />
             <span className="text-sm font-medium text-[#2b303b]">Genius</span>
           </button>
@@ -196,14 +196,14 @@ export function OrderDetail({ order, onBack }) {
             <div className="flex items-center justify-between">
               <h1 className="text-[24px] font-semibold text-[#222530] leading-8">Order Detail</h1>
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 h-8 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white text-[12px] font-medium text-[#525866]">
+                <button className="flex items-center gap-1.5 h-8 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white text-[12px] font-medium text-[#525866] hover:bg-[#f2f4f8] transition-colors">
                   <span>Order ID</span>
                   <ChevronDownIcon className="w-3 h-3" />
-                </div>
-                <div className="flex items-center gap-2 h-8 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white text-[12px] font-medium text-[#525866]">
+                </button>
+                <button className="flex items-center gap-2 h-8 px-3 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white text-[12px] font-medium text-[#525866] hover:bg-[#f2f4f8] transition-colors">
                   <SearchIcon className="w-3 h-3 text-[#99a0ae]" />
                   <span>ID-55668484</span>
-                </div>
+                </button>
                 <button className="flex items-center justify-center w-8 h-8 border border-[#e1e4ea] rounded-[10px] shadow-xs bg-white hover:bg-[#f2f4f8]">
                   <DotsIcon />
                 </button>
@@ -238,7 +238,7 @@ export function OrderDetail({ order, onBack }) {
                     <div className="flex items-center justify-between px-4 py-3 border-t border-[#e1e4ea]">
                       <p className="text-[14px] font-medium text-[#525866]">Want to know more about this order?</p>
                       <button
-                        className="flex items-center gap-2 cursor-pointer"
+                        className="flex items-center gap-2 px-2 py-1 rounded-[8px] hover:bg-[#e8eaed] transition-colors"
                         onClick={() => setGeniusOpen(true)}
                       >
                         <div className="w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_5px_2px_#e9e7ff]"
@@ -301,8 +301,8 @@ export function OrderDetail({ order, onBack }) {
                   <p className="text-[14px] text-[#717784]">The following Juspay features were employed to ensure that this order was successfully completed</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-3 py-1 border border-[#e1e4ea] rounded-[8px] text-[14px] font-medium text-[#525866]">Silent Retry</span>
-                  <span className="px-3 py-1 border border-[#e1e4ea] rounded-[8px] text-[14px] font-medium text-[#525866]">SR V2 Routing</span>
+                  <button className="px-3 py-1 border border-[#e1e4ea] rounded-[8px] text-[14px] font-medium text-[#525866] hover:bg-[#f2f4f8] transition-colors">Silent Retry</button>
+                  <button className="px-3 py-1 border border-[#e1e4ea] rounded-[8px] text-[14px] font-medium text-[#525866] hover:bg-[#f2f4f8] transition-colors">SR V2 Routing</button>
                 </div>
               </div>
 

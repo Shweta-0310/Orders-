@@ -167,9 +167,9 @@ export function OrdersTable({ onRowClick }) {
                 </div>
               </div>
               <div className="w-12 shrink-0">
-                <div className="flex items-center justify-center px-4 py-[15px] bg-[#fcfcfd] border-b border-t border-r border-[#eceff3] rounded-tr-xl">
+                <button className="flex items-center justify-center w-full px-4 py-[15px] bg-[#fcfcfd] border-b border-t border-r border-[#eceff3] rounded-tr-xl hover:bg-[#f2f4f8] transition-colors">
                   <PlusIcon className="w-4 h-4 text-[#525866]" />
-                </div>
+                </button>
               </div>
             </div>
 

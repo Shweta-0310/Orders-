@@ -91,7 +91,7 @@ export function Sidebar() {
           <SidebarItem icon={KeyIcon} />
         </div>
         <div className="border-t border-[#e1e4ea] flex items-center justify-center py-3">
-          <button className="flex items-center justify-center w-6 h-6 rounded-[4px] overflow-hidden">
+          <button className="flex items-center justify-center w-6 h-6 rounded-[4px] overflow-hidden hover:opacity-80 transition-opacity">
             <div className="w-6 h-6 rounded bg-gradient-to-br from-blue-400 to-purple-500" />
           </button>
         </div>

@@ -4,20 +4,24 @@ import { Topbar } from './components/Topbar.jsx';
 import { Filters } from './components/Filters.jsx';
 import { OrdersTable } from './components/OrdersTable.jsx';
 import { OrderDetail } from './components/OrderDetail.jsx';
+import { GeniusSidebar } from './components/GeniusSidebar.jsx';
 
 export default function App() {
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [geniusOpen, setGeniusOpen] = useState(false);
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-white font-sans">
       <Sidebar />
 
-      <div className="flex flex-col flex-1 min-w-0 h-full overflow-hidden">
+      <div className="flex flex-col flex-1 min-w-0 h-full overflow-hidden relative">
+        <GeniusSidebar open={geniusOpen} onClose={() => setGeniusOpen(false)} />
+
         {selectedOrder ? (
           <OrderDetail order={selectedOrder} onBack={() => setSelectedOrder(null)} />
         ) : (
           <>
-            <Topbar />
+            <Topbar onGeniusClick={() => setGeniusOpen(true)} />
             <div className="flex-1 overflow-y-auto">
               <Filters />
               <OrdersTable onRowClick={setSelectedOrder} />
